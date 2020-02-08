@@ -8,33 +8,53 @@
       height="200px"
       :src="shopItem.image_url.shop_image1"
     >
-      <v-card-title>{{ shopItem.name }}</v-card-title>
+      <v-card-title class="shop-name">{{ shopItem.name }}</v-card-title>
     </v-img>
 
-    <v-card-subtitle class="pb-0">{{ shopItem.name }}</v-card-subtitle>
-    <v-card-subtitle class="pa-0 pl-4">{{ shopItem.tel }}</v-card-subtitle>
+    <v-chip
+      class="ma-2"
+      color="pink"
+      label
+      text-color="white"
+      small
+      v-for="category_name in shopItem.code.category_name_s"
+      v-bind:key="category_name"
+    >
+      <v-icon left>mdi-label</v-icon>
+      {{ category_name }}
+    </v-chip>
 
-    <v-card-text class="text--primary">
-      <div>{{ shopItem.pr }}</div>
+    <v-divider></v-divider>
+    
+    <v-card-text class="pt-0 pb-0">
+      <div>{{ shopItem.pr.pr_short }}</div>
+      
+      <v-divider></v-divider>
+      
+      <div>{{ shopItem.address }}</div>
+      
+      <v-divider></v-divider>
+      
+      <div>{{ shopItem.tel }}</div>
     </v-card-text>
 
     <v-card-actions>
       <v-btn
         color="orange"
-        text
+        :href="shopItem.url"
+        target="blank"
       >
-        Share
-      </v-btn>
-
-      <v-btn
-        color="orange"
-        text
-      >
-        Explore
+        詳細をみる
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
+
+<style scoped>
+.shop-name {
+  background-color: #111111BB
+}
+</style>
 
 <script>
 export default {

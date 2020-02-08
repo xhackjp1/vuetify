@@ -2,6 +2,7 @@
   <v-container fluid>
     <v-text-field
       v-model="searchText"
+      placeholder="検索ワードを入力してください"
       solo-inverted
       flat
       hide-details
@@ -22,7 +23,6 @@
         <EventCard v-bind:shop-item="shop"></EventCard>
       </v-col>
     </v-row>
-    <v-btn @click="send">クリック</v-btn>
   </v-container>
 </template>
 
@@ -35,17 +35,18 @@ export default {
   components: {
     EventCard
   },
+  mounted: function () {
+    this.send('焼肉')
+  },
   methods: {
     search: function () {
       this.send(this.searchText)
     },
-    sample: function () {
-      alert('hello')
-    },
     send: function (searchText) {
       let baseUrl = 'https://api.gnavi.co.jp/RestSearchAPI/v3/'
       let apiKey = '60e919407001d7a00adc7f4a8764a2d9'
-      let url = `${baseUrl}?keyid=${apiKey}&freeword=${searchText}`
+      let limit = 30
+      let url = `${baseUrl}?keyid=${apiKey}&freeword=${searchText}&hit_per_page=${limit}`
       axios
         .get(url)
         .then((response) => {
@@ -56,29 +57,8 @@ export default {
   },
   data: function () {
     return {
-      searchText: '検索してください',
-      shops: [
-        {
-          id: 1,
-          name: '焼肉 長谷川1',
-          image_url: 'http://uds.gnst.jp/rest/img/me02ncv80000/s_00im.jpg?t=1395807984'
-        },
-        {
-          id: 2,
-          name: '焼肉 長谷川1',
-          image_url: 'http://uds.gnst.jp/rest/img/me02ncv80000/s_00im.jpg?t=1395807984'
-        },
-        {
-          id: 3,
-          name: '焼肉 長谷川1',
-          image_url: 'http://uds.gnst.jp/rest/img/me02ncv80000/s_00im.jpg?t=1395807984'
-        },
-        {
-          id: 4,
-          name: 'タピオカ',
-          image_url: 'http://uds.gnst.jp/rest/img/me02ncv80000/s_00im.jpg?t=1395807984'
-        }
-      ]
+      searchText: '',
+      shops: []
     }
   }
 }
