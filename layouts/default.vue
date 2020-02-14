@@ -1,74 +1,96 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      :mini-variant.sync="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      fixed
+  <v-app id="keep">
+    <v-app-bar
+      app
+      clipped-left
+      color="primary"
     >
+      <v-app-bar-nav-icon @click="drawer = !drawer" class="white--text" />
+      <nuxt-link to="/">
+        <span class="title ml-3 mr-5 white--text">AIPS&nbsp;<span class="font-weight-light">Keep</span></span>
+      </nuxt-link>
+      <v-spacer />
+    </v-app-bar>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      color="grey lighten-4"
+      >
+      <v-list
+        dense
+        class="grey lighten-4"
+      >
+        <template v-for="(item, i) in items">
+          <v-row
+            v-if="item.heading"
+            :key="i"
+            align="center"
+          >
+            <v-col cols="6">
+              <v-subheader v-if="item.heading">
+                {{ item.heading }}
+              </v-subheader>
+            </v-col>
+          </v-row>
+          <v-divider
+            v-else-if="item.divider"
+            :key="i"
+            dark
+            class="my-4"
+          />
+          <v-list-item
+            v-else
+            :key="i"
+            link
+            :to="item.href"
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
     </v-navigation-drawer>
-    <v-toolbar>
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>menu</v-icon>
-      </v-btn>
-    </v-toolbar>
+
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-    >
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed">
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
   export default {
+    props: {
+      source: String
+    },
     data () {
       return {
-        clipped: false,
-        drawer: false,
-        fixed: false,
         items: [
-          { icon: 'apps', title: 'Welcome', to: '/' },
-          { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
+          { icon: 'mdi-tree', text: 'お問い合わせ', href: '/management-companies/new' },
+          { icon: 'mdi-tree', text: '利用規約', href: '/management-companies/list' }
         ],
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: 'Vuetify.js'
+        drawer: false,
+        ready: false
       }
+    },
+    mounted () {
+    },
+    methods: {
     }
   }
 </script>
+
+<style>
+#keep .v-navigation-drawer__border {
+  display: none
+}
+</style>
