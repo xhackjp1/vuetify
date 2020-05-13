@@ -7,7 +7,7 @@
     >
       <v-app-bar-nav-icon @click="drawer = !drawer" class="white--text" />
       <nuxt-link to="/">
-        <span class="title ml-3 mr-5 white--text">AIPS&nbsp;<span class="font-weight-light">Keep</span></span>
+        <span class="title ml-3 mr-5 white--text">不動産&nbsp;<span class="font-weight-light">検索</span></span>
       </nuxt-link>
       <v-spacer />
     </v-app-bar>
@@ -75,8 +75,8 @@
     data () {
       return {
         items: [
-          { icon: 'mdi-tree', text: 'お問い合わせ', href: '/management-companies/new' },
-          { icon: 'mdi-tree', text: '利用規約', href: '/management-companies/list' }
+          { icon: 'mdi-tree', text: 'お問い合わせ', href: 'contact' },
+          { icon: 'mdi-tree', text: '利用規約', href: 'terms_of_service' }
         ],
         drawer: false,
         ready: false
