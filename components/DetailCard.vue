@@ -1,11 +1,11 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="400"
+    max-width="800"
   >
     <v-img
       class="white--text align-end"
-      height="200px"
+      height="480"
       :src="shopItem.image_url.shop_image1"
     >
       <v-card-title class="shop-name">{{ shopItem.name }}</v-card-title>
@@ -41,7 +41,7 @@
     <v-card-actions>
       <v-btn
         color="orange"
-        to="shops/1"
+        :href="shopItem.url"
         target="blank"
       >
         詳細をみる

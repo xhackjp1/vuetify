@@ -6,8 +6,6 @@
       solo-inverted
       flat
       hide-details
-      label="Search"
-      prepend-inner-icon="search"
       @change="search"
     />
     <v-row >
