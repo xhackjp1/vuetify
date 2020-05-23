@@ -1,5 +1,4 @@
 const colors = require('vuetify/es5/util/colors').default
-
 module.exports = {
   head: {
     mode: 'universal',
@@ -20,7 +19,9 @@ module.exports = {
     // '@/assets/util.css'
   ],
   plugins: [
-    { src: '~/plugins/axios.js', ssr: false },
+    { src: '~/plugins/config.js' },
+    { src: '~/plugins/axios.js', ssr: true },
+    { src: '~plugins/ga.js', mode: 'client' }
   ],
   buildModules: [
     '@nuxtjs/eslint-module',
@@ -29,7 +30,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/auth',
+    // '@nuxtjs/auth',
     'cookie-universal-nuxt'
   ],
   vuetify: {
